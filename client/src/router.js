@@ -11,8 +11,12 @@ const router =  new Router({
     routes: [
       {
         path: '/',
-        redirect: '/App',
-        requiresAuth:true,
-      }
+        name: 'home',
+        component: App,
+        meta: {
+          requiresAuth: false,
+             title: `${config.app.name} - Upload images--free`
+        } 
+      },
     ]
 })
