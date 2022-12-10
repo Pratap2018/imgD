@@ -1,22 +1,23 @@
-import Vue from 'vue'
-import Router from 'vue-router'
 import config from './config'
+import { createWebHistory, createRouter } from "vue-router";
+import home from './views/home'
 
-import App from './App'
-import fetch from 'node-fetch'
-Vue.use(Router)
 
-const router =  new Router({
-    mode: 'hash',
-    routes: [
-      {
-        path: '/',
-        name: 'home',
-        component: App,
-        meta: {
-          requiresAuth: false,
-             title: `${config.app.name} - Upload images--free`
-        } 
-      },
-    ]
-})
+const routes = [
+    {
+      path: '/',
+      name: 'home',
+      component: home,
+      meta: {
+        requiresAuth: false,
+           title: `${config.app.name} - Upload images--free`
+      } 
+    },
+  ]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+  });
+  
+export default router;
