@@ -32,6 +32,10 @@
 </template>
 
 <script>
+import config from  '../config'
+
+
+
 // import { isEmpty, isValidURL } from '../mixins/fieldValidation'
 
 export default {
@@ -59,7 +63,14 @@ export default {
       }
     }
   },
-
+  mounted(){
+    const dataL = JSON.parse(localStorage.getItem('userData'))
+    if(dataL.email=="dummy@gmail.com"){
+      localStorage.removeItem('userData')
+      localStorage.removeItem('authToken')
+      window.location.reload()
+    }
+  },
 
   methods: {
     uploadImag(e) {
@@ -84,8 +95,8 @@ export default {
     createAnOrg(){
       const dataL = JSON.parse(localStorage.getItem('userData'))
 
-      const walletURL="http://localhost:4999/chrome/popup/popup#"
-      // const walletURL="https://wallet-stage.hypersign.id"
+    
+      const walletURL=config.webWalletAddress
 
       const data={
     "QRType": "ISSUE_DID",
@@ -111,6 +122,10 @@ export default {
 }
 
       const url=walletURL+'/deeplink?url='+JSON.stringify(data)
+      if(this.previewImage==''){
+        alert('Please upload an image')
+        return
+      }
       window.open( `${url}`,
           "popUpWindow",
           `height=800,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes`);

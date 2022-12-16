@@ -7,8 +7,9 @@
 
     </div>
 </template>
-
 <script>
+import config from  '../config'
+
 export default {
     name: 'display-1',
     data() {
@@ -18,22 +19,27 @@ export default {
     }
     ,
     async mounted() {
-        document.getElementsByClassName('box')[0].style.display = 'none'
+        
+        const userData=JSON.parse(localStorage.getItem('userData'))
+        if(userData==null){
+            localStorage.setItem('userData',JSON.stringify({"email":"dummy@gmail.com","name":"dummy","id":"did:hid:testnet:dummy"}))
+            window.location.reload()
+        }
         const id = this.$route.params.id
         if(id==''){
             alert('Invalid DID')
-            window.location.href = 'http://localhost:8080/#/'
+            window.location.href = config.hostAddress
         }
         if(!id.includes('did:hid:testnet')){
             alert('Invalid DID')
-           window.location.href = 'http://localhost:8080/#/'
+           window.location.href = config.hostAddress
         }
         
         const resp = await fetch('https://jagrat.hypersign.id/rest/hypersign-protocol/hidnode/ssi/did/' + id)
         const temp=await resp.json()
         if(temp.didDocument==null){
             alert('No image found')
-            window.location.href = 'http://localhost:8080/#/'
+            window.location.href = config.hostAddress
         }
         const service=temp.didDocument.service
 
@@ -46,7 +52,7 @@ export default {
         });
         if(this.data==''){
             alert('No image found')
-            window.location.href = 'http://localhost:8080/#/'
+            window.location.href = config.hostAddress
         }
 
     },

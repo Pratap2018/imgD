@@ -7,5 +7,9 @@
  }
  
  const webWalletAddress="https://wallet-stage.hypersign.id"
+ const hostAddress='http://localhost:8080/#/'
+
  config['webWalletAddress']=webWalletAddress
+config['hostAddress']=hostAddress
+
  export default config
