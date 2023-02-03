@@ -108,7 +108,7 @@ export default {
     "provider": "",
     "data": {
         "controllers": [
-            dataL.id
+            dataL.holder
         ],
         "alsoKnownAs": "test.org",
         "serviceData":{
@@ -122,6 +122,7 @@ export default {
 }
 
       const url=walletURL+'/deeplink?url='+JSON.stringify(data)
+      console.log(data);
       if(this.previewImage==''){
         alert('Please upload an image')
         return

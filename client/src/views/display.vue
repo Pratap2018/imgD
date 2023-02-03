@@ -35,7 +35,7 @@ export default {
            window.location.href = config.hostAddress
         }
         
-        const resp = await fetch('https://jagrat.hypersign.id/rest/hypersign-protocol/hidnode/ssi/did/' + id)
+        const resp = await fetch('https://api.jagrat.hypersign.id/hypersign-protocol/hidnode/ssi/did/' + id)
         const temp=await resp.json()
         if(temp.didDocument==null){
             alert('No image found')
